@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dojo Survey</title>
+    <link rel="stylesheet" href="styles.css">
+<body>
+    <div id="wrapper">
+        <form action='/submit' method='post'>
+            <h1>Dojo Survey</h1>
+            <div class="row">
+                <div class="col-left">
+                    Your Name:
+                </div>
+                <div class="col-right">
+                    <input type='text' name='name'>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-left">
+                    Dojo Location:
+                </div>
+                <div class="col-right">
+                    <select name="location" id="1">
+                        <option value="Seattle">Seattle</option>
+                        <option value="Washington DC">Washington DC</option>
+                        <option value="Los Angeles">Los Angeles</option>
+                        <option value="Silicon Valley">Silicon Valley</option>
+                        <option value="Chicago">Chicago</option>
+                        <option value="Dallas">Dallas</option>
+                        <option value="Tulsa">Tulsa</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-left">
+                    Favorite Language:
+                </div>
+                <div class="col-right">
+                    <select name="language" id="2">
+                        <option value="HTML/CSS/JS">HTML/CSS/JS</option>
+                        <option value="Python">Python</option>
+                        <option value="iOS Swift">iOS Swift</option>
+                        <option value="C# .Net">C# .Net</option>
+                        <option value="RUBY">RUBY</option>
+                        <option value="MEAN">MEAN</option>
+                        <option value="Java">Java</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-left">
+                    Comments (optional):
+                </div>
+                <div class="col-right">
+                    <textarea name="comment" id="" cols="30" rows="10"></textarea></p>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
