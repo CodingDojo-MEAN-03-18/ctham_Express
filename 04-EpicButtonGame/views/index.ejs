@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dojo Survey</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            // this triggers the connection event in our server!
+            var socket  = io.connect();
+            // we'll write all the socket stuff after the above line!
+            $('#button_epic').click(function() {
+                socket.emit('client_epic');
+                return false;
+            });
+            $('#button_reset').click(function() {
+                socket.emit('client_reset');
+                return false;
+            });
+            socket.on('server_cnt', function(emitData) {
+                console.log('server_cnt',emitData.response);
+                $('#cnt').html(emitData.response);
+                return false;
+            });
+        })
+   </script>
+<body>
+    <div id="wrapper">
+        <h1>The button has been pushed <span id="cnt">0</span> time(s)</h1>
+        <br>
+        <p>Push the button to update the count!
+            <button id="button_epic">Push the epic button</button>
+        </p>
+        <br>
+        <button id="button_reset">Reset count</button>
+    </div>
+</body>
+</html>

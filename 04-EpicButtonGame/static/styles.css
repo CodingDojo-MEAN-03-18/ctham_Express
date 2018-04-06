@@ -1,0 +1,19 @@
+/* * {
+    outline: 1px dotted red;
+} */
+#wrapper {
+    width: 600px;
+    height: 400px;
+    margin: 0px auto;
+    text-align: center;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+  
+}
+#button_epic {
+    background-color: lightskyblue;
+}
+#button_reset {
+    background-color: red;
+}
