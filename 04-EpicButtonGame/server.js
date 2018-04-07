@@ -44,12 +44,12 @@ io.sockets.on('connection', function (socket) {
     // all the server socket code goes in here
     socket.on("client_epic", function (){
         count ++;
-        console.log('js emitData', count);
+        console.log('client_epic', count);
         socket.emit('server_cnt', {response: count});
     })
     socket.on("client_reset", function (){
         count = 0;
-        console.log('js emitData', count);
+        console.log('client_reset', count);
         socket.emit('server_cnt', {response: count});
     })
 })
