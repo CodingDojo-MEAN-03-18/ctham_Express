@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Group Chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+        $(document).ready(function (){
+            // this triggers the connection event in our server!
+            var socket  = io.connect();
+            // we'll write all the socket stuff after the above line!
+            if (!username) {
+                var username = prompt('Enter your name:');
+                console.log('client_user', username);
+                socket.emit('client_user', {
+                    name: username
+                });
+                $('#current_name').html(username);
+            }
+
+            $('#button_send').click(function(data) {
+                var msg = $('#chatInput').val();
+                let tmp = {
+                    name: username,
+                    message: msg
+                }
+                console.log('client_message', data, tmp);
+                socket.emit('client_message', tmp);
+                return false;
+            });
+
+            socket.on('server_user', function(data) {
+                console.log('client_user', data, data.chatBox.length);
+                let tmp = '';
+                for (let x=0; x<data.chatBox.length; x++) {
+                    tmp += data.chatBox[x].name + ':\t'+ data.chatBox[x].message + '\n';
+                    console.log('1*', x, tmp);
+                }
+                $('#chatBox').html(tmp);
+                return false;
+            });
+            socket.on('server_message', function(data) {
+                console.log('client_message', data);
+                let tmp = '';
+                for (let x=0; x<data.chatBox.length; x++) {
+                    tmp += data.chatBox[x].name + ':\t'+ data.chatBox[x].message + '\n';
+                    console.log('2*', x, tmp);
+                }
+                $('#chatBox').html(tmp);
+                return false;
+            });
+        })
+   </script>
+<body>
+    <div id="wrapper">
+        <h1>Conversation Board</h1>
+        <br>
+        <form action="" method="get">
+            <textarea name="chatBox" id="chatBox" cols="100" rows=20></textarea>
+            Your name is [<span id='current_name'></span>] &nbsp;&nbsp;&nbsp; <input type="text" id="chatInput" value="" placeholder="Enter your message here">
+            <button id="button_send">Send</button>
+        </form>
+    </div>
+</body>
+</html>
